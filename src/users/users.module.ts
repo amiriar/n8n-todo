@@ -1,7 +1,4 @@
-import {
-  // common
-  Module,
-} from '@nestjs/common';
+import { Module } from '@nestjs/common';
 
 import { UsersController } from './users.controller';
 
@@ -12,11 +9,7 @@ import { FilesModule } from '../files/files.module';
 const infrastructurePersistenceModule = DocumentUserPersistenceModule;
 
 @Module({
-  imports: [
-    // import modules, etc.
-    infrastructurePersistenceModule,
-    FilesModule,
-  ],
+  imports: [infrastructurePersistenceModule, FilesModule],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService, infrastructurePersistenceModule],

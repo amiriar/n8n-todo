@@ -38,29 +38,29 @@ export class MailService {
     );
     url.searchParams.set('hash', mailData.data.hash);
 
-    await this.mailerService.sendMail({
-      to: mailData.to,
-      subject: emailConfirmTitle,
-      text: `${url.toString()} ${emailConfirmTitle}`,
-      templatePath: path.join(
-        this.configService.getOrThrow('app.workingDirectory', {
-          infer: true,
-        }),
-        'src',
-        'mail',
-        'mail-templates',
-        'activation.hbs',
-      ),
-      context: {
-        title: emailConfirmTitle,
-        url: url.toString(),
-        actionTitle: emailConfirmTitle,
-        app_name: this.configService.get('app.name', { infer: true }),
-        text1,
-        text2,
-        text3,
-      },
-    });
+    // await this.mailerService.sendMail({
+    //   to: mailData.to,
+    //   subject: emailConfirmTitle,
+    //   text: `${url.toString()} ${emailConfirmTitle}`,
+    //   templatePath: path.join(
+    //     this.configService.getOrThrow('app.workingDirectory', {
+    //       infer: true,
+    //     }),
+    //     'src',
+    //     'mail',
+    //     'mail-templates',
+    //     'activation.hbs',
+    //   ),
+    //   context: {
+    //     title: emailConfirmTitle,
+    //     url: url.toString(),
+    //     actionTitle: emailConfirmTitle,
+    //     app_name: this.configService.get('app.name', { infer: true }),
+    //     text1,
+    //     text2,
+    //     text3,
+    //   },
+    // });
   }
 
   async forgotPassword(
@@ -91,32 +91,32 @@ export class MailService {
     url.searchParams.set('hash', mailData.data.hash);
     url.searchParams.set('expires', mailData.data.tokenExpires.toString());
 
-    await this.mailerService.sendMail({
-      to: mailData.to,
-      subject: resetPasswordTitle,
-      text: `${url.toString()} ${resetPasswordTitle}`,
-      templatePath: path.join(
-        this.configService.getOrThrow('app.workingDirectory', {
-          infer: true,
-        }),
-        'src',
-        'mail',
-        'mail-templates',
-        'reset-password.hbs',
-      ),
-      context: {
-        title: resetPasswordTitle,
-        url: url.toString(),
-        actionTitle: resetPasswordTitle,
-        app_name: this.configService.get('app.name', {
-          infer: true,
-        }),
-        text1,
-        text2,
-        text3,
-        text4,
-      },
-    });
+    // await this.mailerService.sendMail({
+    //   to: mailData.to,
+    //   subject: resetPasswordTitle,
+    //   text: `${url.toString()} ${resetPasswordTitle}`,
+    //   templatePath: path.join(
+    //     this.configService.getOrThrow('app.workingDirectory', {
+    //       infer: true,
+    //     }),
+    //     'src',
+    //     'mail',
+    //     'mail-templates',
+    //     'reset-password.hbs',
+    //   ),
+    //   context: {
+    //     title: resetPasswordTitle,
+    //     url: url.toString(),
+    //     actionTitle: resetPasswordTitle,
+    //     app_name: this.configService.get('app.name', {
+    //       infer: true,
+    //     }),
+    //     text1,
+    //     text2,
+    //     text3,
+    //     text4,
+    //   },
+    // });
   }
 
   async confirmNewEmail(mailData: MailData<{ hash: string }>): Promise<void> {
@@ -142,28 +142,28 @@ export class MailService {
     );
     url.searchParams.set('hash', mailData.data.hash);
 
-    await this.mailerService.sendMail({
-      to: mailData.to,
-      subject: emailConfirmTitle,
-      text: `${url.toString()} ${emailConfirmTitle}`,
-      templatePath: path.join(
-        this.configService.getOrThrow('app.workingDirectory', {
-          infer: true,
-        }),
-        'src',
-        'mail',
-        'mail-templates',
-        'confirm-new-email.hbs',
-      ),
-      context: {
-        title: emailConfirmTitle,
-        url: url.toString(),
-        actionTitle: emailConfirmTitle,
-        app_name: this.configService.get('app.name', { infer: true }),
-        text1,
-        text2,
-        text3,
-      },
-    });
+    // await this.mailerService.sendMail({
+    //   to: mailData.to,
+    //   subject: emailConfirmTitle,
+    //   text: `${url.toString()} ${emailConfirmTitle}`,
+    //   templatePath: path.join(
+    //     this.configService.getOrThrow('app.workingDirectory', {
+    //       infer: true,
+    //     }),
+    //     'src',
+    //     'mail',
+    //     'mail-templates',
+    //     'confirm-new-email.hbs',
+    //   ),
+    //   context: {
+    //     title: emailConfirmTitle,
+    //     url: url.toString(),
+    //     actionTitle: emailConfirmTitle,
+    //     app_name: this.configService.get('app.name', { infer: true }),
+    //     text1,
+    //     text2,
+    //     text3,
+    //   },
+    // });
   }
 }

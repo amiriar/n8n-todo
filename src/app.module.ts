@@ -17,6 +17,7 @@ import { SessionModule } from './session/session.module';
 import { MailerModule } from './mailer/mailer.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from './database/mongoose-config.service';
+import { TodosModule } from './todos/todos.module';
 
 const infrastructureDatabaseModule = MongooseModule.forRootAsync({
   useClass: MongooseConfigService,
@@ -53,6 +54,7 @@ const infrastructureDatabaseModule = MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
     }),
+    TodosModule,
     UsersModule,
     FilesModule,
     AuthModule,
