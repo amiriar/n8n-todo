@@ -15,6 +15,7 @@ export class TodoMapper {
       domainEntity.photo = null;
     }
 
+    domainEntity.userId = raw.userId;
     domainEntity.createdAt = raw.createdAt;
     domainEntity.updatedAt = raw.updatedAt;
     domainEntity.deletedAt = raw.deletedAt;
@@ -38,6 +39,7 @@ export class TodoMapper {
     persistenceSchema.title = domainEntity.title;
     persistenceSchema.description = domainEntity.description;
     persistenceSchema.photo = photo;
+    persistenceSchema.userId = domainEntity.userId;
     persistenceSchema.createdAt = domainEntity.createdAt;
     persistenceSchema.updatedAt = domainEntity.updatedAt;
     persistenceSchema.deletedAt = domainEntity.deletedAt;

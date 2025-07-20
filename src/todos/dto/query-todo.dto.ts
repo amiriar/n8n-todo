@@ -16,6 +16,10 @@ export class FilterTodoDto {
   @IsOptional()
   @ValidateNested({ each: true })
   description?: string;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  userId?: string;
 }
 
 export class SortTodoDto {

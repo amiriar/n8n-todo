@@ -31,6 +31,11 @@ export class Todo {
   description: string;
 
   @ApiProperty({
+    type: String,
+  })
+  userId: string;
+
+  @ApiProperty({
     type: () => FileType,
   })
   photo?: FileType | null;

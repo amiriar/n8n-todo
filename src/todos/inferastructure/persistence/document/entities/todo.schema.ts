@@ -27,6 +27,11 @@ export class TodoSchemaClass extends EntityDocumentHelper {
   description: string | null;
 
   @Prop({
+    type: String,
+  })
+  userId: string;
+
+  @Prop({
     type: FileSchemaClass,
   })
   photo?: FileSchemaClass | null;

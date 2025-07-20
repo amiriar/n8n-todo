@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   SerializeOptions,
   UseGuards,
 } from '@nestjs/common';
@@ -31,6 +32,7 @@ import { QueryTodoDto } from './dto/query-todo.dto';
 import { infinityPagination } from '../utils/infinity-pagination';
 import { NullableType } from '../utils/types/nullable.type';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { Request } from 'express';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
@@ -50,8 +52,11 @@ export class TodosController {
   })
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createTodoDto: CreateTodoDto): Promise<Todo> {
-    return this.todoService.create(createTodoDto);
+  create(
+    @Req() req: Request,
+    @Body() createTodoDto: CreateTodoDto,
+  ): Promise<Todo> {
+    return this.todoService.create(createTodoDto, req.user.id);
   }
 
   @ApiOkResponse({
@@ -64,6 +69,7 @@ export class TodosController {
   @HttpCode(HttpStatus.OK)
   async findAll(
     @Query() query: QueryTodoDto,
+    @Req() req: Request,
   ): Promise<InfinityPaginationResponseDto<Todo>> {
     const page = query?.page ?? 1;
     let limit = query?.limit ?? 10;
@@ -75,10 +81,8 @@ export class TodosController {
       await this.todoService.findManyWithPagination({
         filterOptions: query?.filters,
         sortOptions: query?.sort,
-        paginationOptions: {
-          page,
-          limit,
-        },
+        paginationOptions: { page, limit },
+        userId: req.user.id,
       }),
       { page, limit },
     );

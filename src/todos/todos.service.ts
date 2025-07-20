@@ -21,7 +21,7 @@ export class TodosService {
     private readonly filesService: FilesService,
   ) {}
 
-  async create(createTodoDto: CreateTodoDto): Promise<Todo> {
+  async create(createTodoDto: CreateTodoDto, userId: string): Promise<Todo> {
     // Do not remove comment below.
     // <creating-property />
 
@@ -46,8 +46,10 @@ export class TodosService {
     return this.todosRepository.create({
       // Do not remove comment below.
       // <creating-property-payload />
+      photo,
       title: createTodoDto.title,
-      description: createTodoDto.description,
+      description: createTodoDto.description ?? '',
+      userId,
     });
   }
 
@@ -55,15 +57,18 @@ export class TodosService {
     filterOptions,
     sortOptions,
     paginationOptions,
+    userId,
   }: {
     filterOptions?: FilterTodoDto | null;
     sortOptions?: SortTodoDto[] | null;
     paginationOptions: IPaginationOptions;
+    userId: string;
   }): Promise<Todo[]> {
     return this.todosRepository.findManyWithPagination({
       filterOptions,
       sortOptions,
       paginationOptions,
+      userId,
     });
   }
 
