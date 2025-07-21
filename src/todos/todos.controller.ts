@@ -121,8 +121,9 @@ export class TodosController {
   update(
     @Param('id') id: Todo['id'],
     @Body() updateProfileDto: UpdateTodoDto,
+    @Req() req: Request,
   ): Promise<Todo | null> {
-    return this.todoService.update(id, updateProfileDto);
+    return this.todoService.update(id, updateProfileDto, req.user.id);
   }
 
   @Delete(':id')

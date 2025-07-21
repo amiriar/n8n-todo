@@ -84,9 +84,13 @@ export class TodosService {
   async update(
     id: Todo['id'],
     updateTodoDto: UpdateTodoDto,
+    userId: string,
   ): Promise<Todo | null> {
     // Do not remove comment below.
     // <updating-property />
+
+    const todo = await this.todosRepository.findById(id);
+    if (!todo || todo.userId !== userId) throw new NotFoundException();
 
     let photo: FileType | null | undefined = undefined;
 
