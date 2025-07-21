@@ -132,7 +132,7 @@ export class TodosController {
     required: true,
   })
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: Todo['id']): Promise<void> {
-    return this.todoService.remove(id);
+  remove(@Param('id') id: Todo['id'], @Req() req: Request): Promise<void> {
+    return this.todoService.remove(id, req.user.id);
   }
 }

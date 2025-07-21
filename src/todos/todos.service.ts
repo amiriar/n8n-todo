@@ -1,6 +1,7 @@
 import {
   HttpStatus,
   Injectable,
+  NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { FilesService } from '../files/files.service';
@@ -114,7 +115,10 @@ export class TodosService {
     });
   }
 
-  async remove(id: Todo['id']): Promise<void> {
+  async remove(id: Todo['id'], userId: string): Promise<void> {
+    const todo = await this.todosRepository.findById(id);
+    if (!todo || todo.userId !== userId) throw new NotFoundException();
+
     await this.todosRepository.remove(id);
   }
 }
